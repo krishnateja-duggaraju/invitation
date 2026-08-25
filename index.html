@@ -56,26 +56,39 @@
             text-transform: uppercase;
         }
 
-        /* Universally Responsive Hero Banner */
+        /* Full Video Visibility Banner */
         .hero {
             position: relative;
             width: 100%;
-            min-height: 100dvh; /* Adapts to all mobile browser address bars */
+            background-color: #000000;
             display: flex;
-            align-items: flex-end;
-            padding: clamp(80px, 12vh, 120px) 5% clamp(30px, 5vh, 60px) 5%;
-            background-image: 
-                linear-gradient(180deg, rgba(20,20,20,0.15) 0%, rgba(20,20,20,0.75) 60%, #141414 100%),
-                url('couple_photo.jpg');
-            background-position: center 20%; /* Keeps faces framed on tall mobile screens */
-            background-repeat: no-repeat;
-            background-size: cover;
+            flex-direction: column;
+            align-items: center;
             border-bottom: 1px solid #222;
+        }
+
+        .hero-video-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin-top: clamp(60px, 8vh, 75px);
+            background-color: #000;
+        }
+
+        .hero-video {
+            width: 100%;
+            height: auto;
+            max-height: 75vh;
+            display: block;
+            object-fit: contain; /* Keeps 100% of the video visible */
+            margin: 0 auto;
         }
 
         .hero-content {
             width: 100%;
             max-width: 750px;
+            padding: 20px 5% 40px 5%;
+            text-align: center;
             z-index: 2;
         }
 
@@ -85,6 +98,7 @@
             font-size: clamp(0.8rem, 2.5vw, 0.95rem);
             margin-bottom: 8px;
             display: flex;
+            justify-content: center;
             flex-wrap: wrap;
             align-items: center;
             gap: 8px;
@@ -104,17 +118,15 @@
             font-size: clamp(0.8rem, 3vw, 1.05rem);
             letter-spacing: 1.5px;
             margin-bottom: 6px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
         }
 
         .hero-title {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(2.5rem, 9vw, 5rem);
+            font-size: clamp(2.5rem, 9vw, 4.5rem);
             font-weight: 400;
             line-height: 0.95;
             color: #FFF;
             letter-spacing: 1.5px;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.9);
             margin-bottom: 12px;
             text-transform: uppercase;
         }
@@ -125,18 +137,19 @@
             color: #E5E5E5;
             margin-bottom: 20px;
             line-height: 1.4;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
         }
 
         .hero-btns {
             display: flex;
-            flex-wrap: wrap;
+            justify-content: center;
             gap: 12px;
             width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
         }
 
-        .btn-play, .btn-info {
-            flex: 1 1 140px;
+        .btn-play {
+            width: 100%;
             text-align: center;
             justify-content: center;
             padding: clamp(10px, 2.5vw, 14px) clamp(16px, 4vw, 28px);
@@ -147,20 +160,39 @@
             align-items: center;
             gap: 8px;
             font-size: clamp(0.85rem, 2.5vw, 1rem);
-            transition: background 0.2s;
-        }
-
-        .btn-play {
             background-color: #FFFFFF;
             color: #000000;
         }
 
-        .btn-info {
-            background-color: rgba(109, 109, 110, 0.7);
+        /* Fixed High-Visibility Floating Unmute/Mute Button */
+        .floating-sound-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 999;
+            background-color: rgba(20, 20, 20, 0.9);
             color: #FFFFFF;
+            border: 2px solid #E50914;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(229, 9, 20, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s ease, background 0.2s ease;
         }
 
-        /* Content Container & Grid Layout */
+        .floating-sound-btn:hover {
+            transform: scale(1.05);
+            background-color: #E50914;
+        }
+
+        /* Section Container & Grid Layout */
         .section-container {
             padding: clamp(25px, 5vh, 45px) 5%;
         }
@@ -180,7 +212,6 @@
             margin-bottom: 40px;
         }
 
-        /* Responsive Tablet & Desktop Grids */
         @media (min-width: 650px) {
             .episodes-grid {
                 grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -290,7 +321,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Executive Producers / Hosts Grid */
         .cast-box {
             background-color: #181818;
             border-radius: 8px;
@@ -322,7 +352,6 @@
             border-left: 3px solid #E50914;
         }
 
-        /* RSVP Section */
         .rsvp-box {
             text-align: center;
             padding: 20px 0 40px 0;
@@ -364,10 +393,22 @@
 
     <nav>
         <div class="netflix-logo">WEDFLIX</div>
-        <div class="nav-tag">ORIGINAL EVENT</div>
+        <div class="nav-tag">OFFICIAL TRAILER</div>
     </nav>
 
+    <!-- Floating Sound Toggle Button -->
+    <button id="soundBtn" class="floating-sound-btn" onclick="toggleAudio()">
+        🔇 Tap for Audio
+    </button>
+
     <section class="hero">
+        <div class="hero-video-wrapper">
+            <video id="heroVideo" class="hero-video" autoplay loop muted playsinline poster="couple_photo.jpg">
+                <source src="trailer.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
         <div class="hero-content">
             <div class="match-score">
                 <span>99% Match</span>
@@ -377,7 +418,7 @@
             </div>
             
             <div class="title-shloka">॥ శ్రీ మదమాత్యేభ్యో నమః ॥ • OM NAMAH SHIVAYA</div>
-            <h1 class="hero-title">KRISHNA TEJA &amp; SRI LALITHA BHRAMARAMBIKA </h1>
+            <h1 class="hero-title">KRISHNA TEJA &amp; SRI LALITHA</h1>
             
             <p class="hero-desc">
                 "Two souls bound by love, blessed by the divine." Join us for an exclusive 3-episode matrimonial celebration.
@@ -385,7 +426,6 @@
 
             <div class="hero-btns">
                 <a href="#itinerary" class="btn-play">▶ View Itinerary</a>
-                <a href="#rsvp" class="btn-info">ℹ RSVP Details</a>
             </div>
         </div>
     </section>
@@ -485,5 +525,22 @@
         © 2026 WEDFLIX ORIGINAL • ALL RIGHTS RESERVED • BLESSINGS REQUIRED ✨
     </footer>
 
+    <!-- Audio Toggle Logic -->
+    <script>
+        function toggleAudio() {
+            var video = document.getElementById("heroVideo");
+            var btn = document.getElementById("soundBtn");
+            
+            if (video.muted) {
+                video.muted = false;
+                btn.innerHTML = "🔊 Sound On";
+                btn.style.borderColor = "#46d369";
+            } else {
+                video.muted = true;
+                btn.innerHTML = "🔇 Tap for Audio";
+                btn.style.borderColor = "#E50914";
+            }
+        }
+    </script>
 </body>
 </html>
