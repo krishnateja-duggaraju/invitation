@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>The Wedding - A Divine Union | Wedflix</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cinzel:wght@700;800&family=Marcellus&family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+            background-color: #141414;
+            color: #FFFFFF;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* Responsive Netflix Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: clamp(55px, 8vh, 70px);
+            padding: 0 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%);
+            z-index: 100;
+        }
+
+        .netflix-logo {
+            color: #E50914;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(1.6rem, 5vw, 2.4rem);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-tag {
+            background: #E50914;
+            color: #fff;
+            padding: 3px 8px;
+            font-size: clamp(0.65rem, 2vw, 0.75rem);
+            font-weight: 700;
+            border-radius: 3px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Universally Responsive Hero Banner */
+        .hero {
+            position: relative;
+            width: 100%;
+            min-height: 100dvh; /* Adapts to all mobile browser address bars */
+            display: flex;
+            align-items: flex-end;
+            padding: clamp(80px, 12vh, 120px) 5% clamp(30px, 5vh, 60px) 5%;
+            background-image: 
+                linear-gradient(180deg, rgba(20,20,20,0.15) 0%, rgba(20,20,20,0.75) 60%, #141414 100%),
+                url('couple_photo.jpg');
+            background-position: center 20%; /* Keeps faces framed on tall mobile screens */
+            background-repeat: no-repeat;
+            background-size: cover;
+            border-bottom: 1px solid #222;
+        }
+
+        .hero-content {
+            width: 100%;
+            max-width: 750px;
+            z-index: 2;
+        }
+
+        .match-score {
+            color: #46d369;
+            font-weight: 700;
+            font-size: clamp(0.8rem, 2.5vw, 0.95rem);
+            margin-bottom: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .badge-rating {
+            border: 1px solid rgba(255,255,255,0.4);
+            color: #fff;
+            padding: 1px 6px;
+            font-size: clamp(0.65rem, 2vw, 0.75rem);
+            border-radius: 2px;
+        }
+
+        .title-shloka {
+            color: #D4AF37;
+            font-family: 'Cinzel', serif;
+            font-size: clamp(0.8rem, 3vw, 1.05rem);
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+        }
+
+        .hero-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.5rem, 9vw, 5rem);
+            font-weight: 400;
+            line-height: 0.95;
+            color: #FFF;
+            letter-spacing: 1.5px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.9);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .hero-desc {
+            font-family: 'Marcellus', serif;
+            font-size: clamp(0.9rem, 3.2vw, 1.15rem);
+            color: #E5E5E5;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+        }
+
+        .hero-btns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .btn-play, .btn-info {
+            flex: 1 1 140px;
+            text-align: center;
+            justify-content: center;
+            padding: clamp(10px, 2.5vw, 14px) clamp(16px, 4vw, 28px);
+            font-weight: 700;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: clamp(0.85rem, 2.5vw, 1rem);
+            transition: background 0.2s;
+        }
+
+        .btn-play {
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+
+        .btn-info {
+            background-color: rgba(109, 109, 110, 0.7);
+            color: #FFFFFF;
+        }
+
+        /* Content Container & Grid Layout */
+        .section-container {
+            padding: clamp(25px, 5vh, 45px) 5%;
+        }
+
+        .section-header {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(1.4rem, 4.5vw, 1.9rem);
+            letter-spacing: 1px;
+            color: #E5E5E5;
+            margin-bottom: 20px;
+        }
+
+        .episodes-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        /* Responsive Tablet & Desktop Grids */
+        @media (min-width: 650px) {
+            .episodes-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        .card {
+            background-color: #181818;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid #282828;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #E50914;
+        }
+
+        .card-img-holder {
+            width: 100%;
+            height: clamp(120px, 20vh, 160px);
+            background: linear-gradient(135deg, #2a080a 0%, #141414 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            border-bottom: 1px solid #282828;
+            position: relative;
+        }
+
+        .card-tag {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.8);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 2px 8px;
+            font-size: 0.68rem;
+            font-weight: 600;
+            border-radius: 3px;
+            color: #D4AF37;
+        }
+
+        .card-ep-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1rem, 3vw, 1.15rem);
+            color: #FFFFFF;
+            font-weight: 700;
+            text-align: center;
+            padding: 0 10px;
+        }
+
+        .card-body {
+            padding: clamp(15px, 3vw, 22px);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-time {
+            color: #46d369;
+            font-size: clamp(0.8rem, 2.5vw, 0.88rem);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .card-desc {
+            font-size: clamp(0.82rem, 2.5vw, 0.9rem);
+            color: #AAAAAA;
+            margin-bottom: 15px;
+        }
+
+        .card-qr-section {
+            text-align: center;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid #252525;
+        }
+
+        .card-qr-section img {
+            width: clamp(90px, 25vw, 120px);
+            height: clamp(90px, 25vw, 120px);
+            border-radius: 6px;
+            border: 1px solid #333;
+            background: #FFF;
+            padding: 4px;
+        }
+
+        .btn-card {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: #E50914;
+            color: #FFF;
+            text-decoration: none;
+            padding: clamp(10px, 2.5vw, 12px) 0;
+            font-size: clamp(0.8rem, 2.5vw, 0.88rem);
+            font-weight: 700;
+            border-radius: 4px;
+            margin-top: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Executive Producers / Hosts Grid */
+        .cast-box {
+            background-color: #181818;
+            border-radius: 8px;
+            padding: clamp(18px, 4vw, 30px);
+            border: 1px solid #282828;
+            margin-bottom: 40px;
+        }
+
+        .cast-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        @media (min-width: 550px) {
+            .cast-grid {
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            }
+        }
+
+        .cast-member {
+            font-family: 'Marcellus', serif;
+            font-size: clamp(0.88rem, 2.8vw, 1.05rem);
+            color: #DDD;
+            padding: 10px 12px;
+            background: #222222;
+            border-radius: 4px;
+            border-left: 3px solid #E50914;
+        }
+
+        /* RSVP Section */
+        .rsvp-box {
+            text-align: center;
+            padding: 20px 0 40px 0;
+        }
+
+        .rsvp-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .phone-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #222222;
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: clamp(0.88rem, 2.5vw, 0.95rem);
+            border: 1px solid #444;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 15px;
+            color: #666;
+            font-size: 0.75rem;
+            border-top: 1px solid #222;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="netflix-logo">WEDFLIX</div>
+        <div class="nav-tag">ORIGINAL EVENT</div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="match-score">
+                <span>99% Match</span>
+                <span class="badge-rating">DIVINE UNION</span>
+                <span>2026</span>
+                <span class="badge-rating">4K ULTRA HD</span>
+            </div>
+            
+            <div class="title-shloka">॥ శ్రీ మదమాత్యేభ్యో నమః ॥ • OM NAMAH SHIVAYA</div>
+            <h1 class="hero-title">KRISHNA TEJA &amp; SRI LALITHA</h1>
+            
+            <p class="hero-desc">
+                "Two souls bound by love, blessed by the divine." Join us for an exclusive 3-episode matrimonial celebration.
+            </p>
+
+            <div class="hero-btns">
+                <a href="#itinerary" class="btn-play">▶ View Itinerary</a>
+                <a href="#rsvp" class="btn-info">ℹ RSVP Details</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-container" id="itinerary">
+        <div class="section-header">EPISODES (EVENT ITINERARY)</div>
+
+        <div class="episodes-grid">
+            <!-- Episode 1 -->
+            <div class="card">
+                <div class="card-img-holder">
+                    <span class="card-tag">EPISODE 1</span>
+                    <div class="card-ep-title">Haldi &amp; Sangeeth</div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="card-time">Sat, 29th Aug 2026 • 8:00 AM Onwards</div>
+                        <div class="card-desc">
+                            Haldi, Pellikoduku &amp; Sangeeth. Breakfast, Lunch, Snacks &amp; Dinner will follow through the event.
+                        </div>
+                    </div>
+                    <div class="card-qr-section">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fshare.google%2Fj4cnWI2iU3LipHaee&color=141414&bgcolor=FFFFFF" alt="Haldi Location QR" />
+                        <a href="https://share.google/j4cnWI2iU3LipHaee" target="_blank" class="btn-card">📍 Location Link</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 2 -->
+            <div class="card">
+                <div class="card-img-holder" style="background: linear-gradient(135deg, #3b1114 0%, #141414 100%);">
+                    <span class="card-tag" style="color: #E50914;">EPISODE 2 • MAIN EVENT</span>
+                    <div class="card-ep-title">The Wedding Muhurtham</div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="card-time">Sun, 30th Aug 2026 • Muhurtham 11:26 PM</div>
+                        <div class="card-desc">
+                            Reception from 7:00 PM | Dinner from 8:00 PM.<br/>
+                            Location: Celebration Venue Hall / Function Centre.
+                        </div>
+                    </div>
+                    <div class="card-qr-section">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fshare.google%2FLV7XlkZ2xKKzmw0Za&color=141414&bgcolor=FFFFFF" alt="Wedding Location QR" />
+                        <a href="https://share.google/LV7XlkZ2xKKzmw0Za" target="_blank" class="btn-card">📍 Location Link</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Episode 3 -->
+            <div class="card">
+                <div class="card-img-holder">
+                    <span class="card-tag">EPISODE 3</span>
+                    <div class="card-ep-title">Satyanarayana Vratham</div>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class="card-time">Mon, 31st Aug 2026 • Morning Hours</div>
+                        <div class="card-desc">
+                            Satyanarayana Swamy Vratham. Divine pooja and holy rituals to seek divine blessings for the newlyweds.
+                        </div>
+                    </div>
+                    <div class="card-qr-section">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fshare.google%2FpuZ03CsiWYLZucq8A&color=141414&bgcolor=FFFFFF" alt="Vratham Location QR" />
+                        <a href="https://share.google/puZ03CsiWYLZucq8A" target="_blank" class="btn-card">📍 Location Link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Executive Producers / Hosts -->
+        <div class="cast-box">
+            <div class="section-header" style="font-size: clamp(1.1rem, 3.5vw, 1.3rem); margin-bottom: 2px;">EXECUTIVE PRODUCERS &amp; HOSTS</div>
+            <div style="color: #888; font-size: 0.8rem; margin-bottom: 12px;">INVITED BY</div>
+            <div class="cast-grid">
+                <div class="cast-member">Duggaraju Srinivas Rao &amp; Girija</div>
+                <div class="cast-member">Ramaraju Srinivas &amp; Lakshmi</div>
+                <div class="cast-member">Vure Saroja</div>
+                <div class="cast-member">Vure Lakshmi Narasimha Rao &amp; Lakshmi</div>
+                <div class="cast-member">K Sridhar &amp; K L Madhuri</div>
+                <div class="cast-member">Vure Sita Rama Krishna &amp; Jyothi</div>
+            </div>
+        </div>
+
+        <!-- RSVP -->
+        <div class="rsvp-box" id="rsvp">
+            <div class="section-header">READY TO CELEBRATE?</div>
+            <p style="color: #888; margin-bottom: 20px; font-size: 0.85rem;">Tap below to confirm your presence.</p>
+            <div class="rsvp-btns">
+                <a href="tel:+917288947173" class="phone-btn">📞 +91 72889 47173</a>
+                <a href="tel:+919849210254" class="phone-btn">📞 +91 98492 10254</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        © 2026 WEDFLIX ORIGINAL • ALL RIGHTS RESERVED • BLESSINGS REQUIRED ✨
+    </footer>
+
+</body>
+</html>
